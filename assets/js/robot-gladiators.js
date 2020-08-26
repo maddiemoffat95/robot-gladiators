@@ -41,7 +41,7 @@ var enemyAttack = 12;
             else {
                 window.alert(playerName + " still has " + playerHealth + " health left.");
             }
-            // if player choses to skip
+
         } if (promptFight === "skip" || promptFight === "SKIP") {
                 // confirm user wants to skip
                 var confirmSkip = window.confirm("Are you sure you'd like to quit?");
@@ -65,8 +65,18 @@ var enemyAttack = 12;
     }
   }
   for (var i = 0; i < enemyNames.length; i++) {
+    if (playerHealth >0) {
+        window.alert("Welcome to Robot Gladiators!" + (i + 1) );
     var pickedEnemyName = enemyNames[i];
     enemyHealth = 50;
+    //debugger;
     fight(pickedEnemyName);
+    }
+    
+    else {
+        window.alert("You have lost your robot in balle! Game Over!");
+        break;
+    }
 } 
+
   fight();

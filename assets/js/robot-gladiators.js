@@ -123,22 +123,35 @@ var startGame = function() {
     }
  endGame();
 }
-var endGame = function () {
-    if (playerInfo.health > 0) {
-        window.alert("Great job, you've survive the game! You now have a score of " + playerInfo.money + ". ");
+var endGame = function() {
+    window.alert("The game has now ended. Let's see how you did!");
+  
+    // check localStorage for high score, if it's not there, use 0
+    var highScore = localStorage.getItem("highscore");
+    if (highScore === null) {
+      highScore = 0;
     }
+    // if player have more money than the high score, player has new high score!
+    if (playerInfo.money > highScore) {
+      localStorage.setItem("highscore", playerInfo.money);
+      localStorage.setItem("name", playerInfo.name);
+  
+      alert(playerInfo.name + " now has the high score of " + playerInfo.money + "!");
+    } 
     else {
-    window.alert("You've lost your robot in battle.");
+      alert(playerInfo.name + " did not beat the high score of " + highScore + ". Maybe next time!");
     }
-    var playerAgainConfirm = window.confirm("Would you like to play again?");
-        if (playerAgainConfirm) {
-            startGame();
-        }
-        else {
-            window.alert("Thank you for playing Roboto Gladiators! come back soon!");
-        }
-}
-
+  
+    // ask player if they'd like to play again
+    var playAgainConfirm = window.confirm("Would you like to play again?");
+  
+    if (playAgainConfirm) {
+      startGame();
+    } 
+    else {
+      window.alert("Thank you for playing Battlebots! Come back soon!");
+    }
+  };
 var shop = function() {
     var shopOptionPrompt = window.prompt(
         "Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one: for REFILL enter '1', for UPGRADE enter '2', for LEAVE enter '3'.");
